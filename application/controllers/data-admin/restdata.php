@@ -40,7 +40,22 @@ class Restdata extends CI_Controller
 
 	public function create()
 	{
-		$this->load->view('admin/create');
+		$data['title'] = "Respons Data";
+		$this->load->view("admin/create");
+	}
+
+	public function store()
+	{
+		$data = array(
+			'name' => $this->input->post('name'),
+			'job' => $this->input->post('job'),
+		);
+		$insert = $this->curl->simple_post($this->api . '/users', $data, array(CURLOPT_BUFFERSIZE => 10));
+		if ($insert) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil di tambahkan</div>)');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data gagal di tambahkan</div>)');
+		}
 	}
 
 	public function delete($id)
@@ -52,5 +67,26 @@ class Restdata extends CI_Controller
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">data gagal di hapus</div>');
 		}
 		redirect('data-admin/restdata');
+	}
+
+	public function update($id)
+	{
+		$data['users'] = json_decode($this->curl->simple_get($this->api . '/users/' . $id))->data;
+		$this->load->view('admin/update', $data);
+	}
+
+	public function update_store($id)
+	{
+		$data = array(
+			'name' => $this->input->post('name'),
+			'job' => $this->input->post('job'),
+		);
+
+		$update = $this->curl->simple_put($this->api . '/users/' . $id, $data, array(CURLOPT_BUFFERSIZE => 10));
+		if ($update) {
+			$this->session->set_flashdata('message', '<div class="alert alert-btn-success" role="alert">Data Berhasil di Update</div>)');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-btn-danger" role="alert">Data gagal diupdate</div>)');
+		}
 	}
 }
