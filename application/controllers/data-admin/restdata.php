@@ -69,15 +69,9 @@ class Restdata extends CI_Controller
 	{
 		$delete = $this->curl->simple_delete($this->api . '/users/' . $id, array('id' => $id), array(CURLOPT_BUFFERSIZE => 10));
 		if ($delete) {
-			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
-			<strong>Success!</strong> data deleted successfully.
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		  </div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">data berhasil di hapus</div>');
 		} else {
-			$this->session->set_flashdata('message', 'div class="alert alert-danger alert-dismissible fade show" role="alert">
-			<strong>Failed!</strong> data failed to delete.
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		  </div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">data gagal di hapus</div>');
 		}
 		redirect('data-admin/restdata');
 	}
@@ -85,27 +79,31 @@ class Restdata extends CI_Controller
 	public function update($id)
 	{
 		$data['users'] = json_decode($this->curl->simple_get($this->api . '/users/' . $id))->data;
-		$this->load->view('admin/update', $data);
+		$data['title'] = "respons update";
+		// var_dump($data['users']);
+		$this->load->view("admin/update", $data);
 	}
 
-	public function update_store($id)
+	public function update_store()
 	{
 		$data = array(
 			'name' => $this->input->post('name'),
-			'job' => $this->input->post('job'),
+			'first_name' => $this->input->post('first_name'),
 		);
 
-		$update = $this->curl->simple_put($this->api . '/users/' . $id, $data, array(CURLOPT_BUFFERSIZE => 10));
+		$update = $this->curl->simple_put($this->api . '/users/' . $this->input->post('id'), $data, array(CURLOPT_BUFFERSIZE => 10));
 		if ($update) {
 			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
 			<strong>Success!</strong> data updated successfully.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		  </div>');
+		  </div>');;
 		} else {
 			$this->session->set_flashdata('message', 'div class="alert alert-danger alert-dismissible fade show" role="alert">
-			<strong>Failed!</strong> data failed to update.
+			<strong>Failed!</strong> 
+			data failed to update.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 		  </div>');
 		}
+		redirect('data-admin/restdata');
 	}
 }

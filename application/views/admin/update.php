@@ -16,41 +16,19 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<?php echo $this->session->flashdata('message'); ?>
-				<a href="/data-admin/restdata/create" class="btn btn-outline-info btn-small">Tambah</a>
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<td>E-mail</td>
-							<td>First Name</td>
-							<td>Last Name</td>
-							<td>Avatar</td>
-							<td>Action</td>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach ($users as $user) : ?>
-							<tr>
-								<td>
-									<?php echo $user->email; ?>
-								</td>
-								<td>
-									<?php echo $user->first_name; ?>
-								</td>
-								<td>
-									<?php echo $user->last_name; ?>
-								</td>
-								<td>
-									<img src="<?php echo $user->avatar; ?>" alt="image">
-								</td>
-								<td>
-									<a href="/data-admin/restdata/update/<?php echo $user->id ?>" class="btn btn-sm btn-outline-warning">update</a>
-									<a href="/data-admin/restdata/delete/<?php echo $user->id; ?>" class="btn btn-outline-danger btn-sm">delete</a>
-								</td>
-							</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table>
+				<?php echo form_open('data-admin/restdata/update_store') ?>
+				<?php echo form_hidden('id', $users->id); ?>
+				<div class="form-group">
+					<label for="email" class="col-form-label">E-mail</label>
+					<input type="email" class="form-control" id="email" name="email" <?php echo form_input('email', $users->email); ?> <span class="text-danger"><?php echo form_error('email') ?></span>
+				</div>
+				<div class="form-group">
+					<label for="first_name" class="col-form-label">first_name</label>
+					<input type="text" class="form-control" id="first_name" name="first_name" <?php echo form_input('first_name', $users->first_name); ?> <span class="text-danger"><?php echo form_error('first_name') ?></span>
+				</div>
+				<?php echo form_submit('submit', 'Update', "class='btn btn-primary'"); ?>
+				<?php echo anchor('/data-admin/restdata', 'Back', "class='btn btn-secondary'"); ?>
+				<?php echo form_close(); ?>
 			</div>
 		</div>
 	</div>
