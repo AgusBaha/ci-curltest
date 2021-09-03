@@ -36,6 +36,21 @@ class Restdata extends CI_Controller
 		$data['users'] = json_decode($this->curl->simple_get($this->api . '/users'))->data;
 		// print_r($data['users']);
 		$this->load->view("admin/index", $data);
-		// $this->load->view('admin/index');
+	}
+
+	public function create()
+	{
+		$this->load->view('admin/create');
+	}
+
+	public function delete($id)
+	{
+		$delete = $this->curl->simple_delete($this->api . '/users/' . $id, array('id' => $id), array(CURLOPT_BUFFERSIZE => 10));
+		if ($delete) {
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">data berhasil di hapus</div>');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">data gagal di hapus</div>');
+		}
+		redirect('data-admin/restdata');
 	}
 }
