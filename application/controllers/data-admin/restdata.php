@@ -35,13 +35,17 @@ class Restdata extends CI_Controller
 		$data['title'] = "Restpons data";
 		$data['users'] = json_decode($this->curl->simple_get($this->api . '/users'))->data;
 		// print_r($data['users']);
+		$this->load->view('_partials/header', $data);
 		$this->load->view("admin/index", $data);
+		$this->load->view('_partials/footer');
 	}
 
 	public function create()
 	{
 		$data['title'] = "Respons Data";
+		$this->load->view('_partials/header', $data);
 		$this->load->view("admin/create", $data);
+		$this->load->view('_partials/footer');
 	}
 
 	public function store()
@@ -80,8 +84,9 @@ class Restdata extends CI_Controller
 	{
 		$data['users'] = json_decode($this->curl->simple_get($this->api . '/users/' . $id))->data;
 		$data['title'] = "respons update";
-		// var_dump($data['users']);
+		$this->load->view('_partials/header', $data);
 		$this->load->view("admin/update", $data);
+		$this->load->view('_partials/footer');
 	}
 
 	public function update_store()
