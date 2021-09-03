@@ -73,9 +73,16 @@ class Restdata extends CI_Controller
 	{
 		$delete = $this->curl->simple_delete($this->api . '/users/' . $id, array('id' => $id), array(CURLOPT_BUFFERSIZE => 10));
 		if ($delete) {
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">data berhasil di hapus</div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Success!</strong> data deleted successfully.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>');
 		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">data gagal di hapus</div>');
+			$this->session->set_flashdata('message', 'div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>Failed!</strong> 
+			data failed to delete.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>');
 		}
 		redirect('data-admin/restdata');
 	}
@@ -101,7 +108,7 @@ class Restdata extends CI_Controller
 			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
 			<strong>Success!</strong> data updated successfully.
 			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		  </div>');;
+		  </div>');
 		} else {
 			$this->session->set_flashdata('message', 'div class="alert alert-danger alert-dismissible fade show" role="alert">
 			<strong>Failed!</strong> 
