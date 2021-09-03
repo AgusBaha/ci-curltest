@@ -1,19 +1,23 @@
 <div class="container mt-3">
 	<div class="row">
 		<div class="col-md-12">
+
+			<div class="dropdown nav justify-content-end">
+				<a class="btn btn-outline-info btn-sm mb-2 shadow dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+					Setting
+				</a>
+
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<li><a class="dropdown-item" href="/Auth/Auth/Logout">Logout</a></li>
+				</ul>
+			</div>
 			<?php echo $this->session->flashdata('message'); ?>
-			<a href="/data-admin/restdata/create" class="btn btn-outline-info btn-sm mb-2 shadow"><i class="fas fa-plus"></i> Tambah</a>
-
 			<div class="row">
-
-				<!-- Area Chart -->
 				<div class="col-xl-12 col-lg-12">
 					<div class="card shadow mb-4">
-						<!-- Card Header - Dropdown -->
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">Data</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Data</h6><a href="/data-admin/restdata/create" class="btn btn-outline-primary btn-sm mb-2 shadow justify-content-end"><i class="fas fa-plus"></i> Tambah</a>
 						</div>
-						<!-- Card Body -->
 						<div class="card-body">
 							<div class="table-responsive">
 								<table class="table table-hover align-middle">

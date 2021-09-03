@@ -32,8 +32,8 @@ class Auth extends CI_Controller
 		$response = $this->curl->simple_post($this->api . '/login', $data, array(CURLOPT_BUFFERSIZE => 10));
 		$hasil = json_decode($response, true);
 		if ($hasil['token']) {
+			$this->session->set_userdata('message', $hasil['token']);
 			redirect('data-admin/restdata');
-			$this->session->set_userdata('token', $hasil['token']);
 		} else {
 			// $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert"></div>');
 			// redirect('/Auth/Auth/index');
@@ -65,5 +65,11 @@ class Auth extends CI_Controller
 			$this->session->set_flashdata('error', 'Email sudah terdaftar');
 		}
 		redirect('/Auth/Auth/regis');
+	}
+
+	public function Logout()
+	{
+		$this->session->sess_destroy();
+		redirect('/Auth/Auth/index');
 	}
 }
