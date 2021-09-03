@@ -41,7 +41,7 @@ class Restdata extends CI_Controller
 	public function create()
 	{
 		$data['title'] = "Respons Data";
-		$this->load->view("admin/create");
+		$this->load->view("admin/create", $data);
 	}
 
 	public function store()
@@ -50,21 +50,34 @@ class Restdata extends CI_Controller
 			'name' => $this->input->post('name'),
 			'job' => $this->input->post('job'),
 		);
-		$insert = $this->curl->simple_post($this->api . '/users', $data, array(CURLOPT_BUFFERSIZE => 10));
+		$insert = $this->curl->simple_post($this->api . '/users/', $data, array(CURLOPT_BUFFERSIZE => 10));
 		if ($insert) {
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data berhasil di tambahkan</div>)');
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Success!</strong> data added successfully.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>');
 		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data gagal di tambahkan</div>)');
+			$this->session->set_flashdata('message', 'div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>Failed!</strong> data failed to add.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>');
 		}
+		redirect('data-admin/restdata/create');
 	}
 
 	public function delete($id)
 	{
 		$delete = $this->curl->simple_delete($this->api . '/users/' . $id, array('id' => $id), array(CURLOPT_BUFFERSIZE => 10));
 		if ($delete) {
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">data berhasil di hapus</div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Success!</strong> data deleted successfully.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>');
 		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">data gagal di hapus</div>');
+			$this->session->set_flashdata('message', 'div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>Failed!</strong> data failed to delete.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>');
 		}
 		redirect('data-admin/restdata');
 	}
@@ -84,9 +97,15 @@ class Restdata extends CI_Controller
 
 		$update = $this->curl->simple_put($this->api . '/users/' . $id, $data, array(CURLOPT_BUFFERSIZE => 10));
 		if ($update) {
-			$this->session->set_flashdata('message', '<div class="alert alert-btn-success" role="alert">Data Berhasil di Update</div>)');
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong>Success!</strong> data updated successfully.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>');
 		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-btn-danger" role="alert">Data gagal diupdate</div>)');
+			$this->session->set_flashdata('message', 'div class="alert alert-danger alert-dismissible fade show" role="alert">
+			<strong>Failed!</strong> data failed to update.
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		  </div>');
 		}
 	}
 }
