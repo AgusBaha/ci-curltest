@@ -5,21 +5,21 @@
 				<div class="col-xl-12 col-lg-12">
 					<div class="card shadow mb-4">
 						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-							<h6 class="m-0 font-weight-bold text-primary">Update</h6>
+							<h6 class="m-0 font-weight-bold text-primary">Registrasi</h6>
 						</div>
 						<div class="card-body">
 							<div class="container">
 								<div class="row">
-									<div class="col-md-6 col-md-offset-3">
+									<div class="col-md-12 col-md-offset-2">
 										<div class="panel panel-login">
 											<div class="panel-heading">
 												<div class="row">
-													<div class="col-xs-6">
+													<!-- <div class="col-xs-6">
 														<a href="#" id="login">Login</a>
 													</div>
 													<div class="col-xs-6">
 														<a href="#" id="register-form-link">Register</a>
-													</div>
+													</div> -->
 													<?php echo form_open('/Auth/Auth/Register', 'class="form-horizontal"'); ?>
 													<div class="col-xs-12 mb-2">
 														<div class="form-group">

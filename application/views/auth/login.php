@@ -1,19 +1,18 @@
 <div class="container mt-5">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<div class="panel panel-login">
-							<div class="panel-heading">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="row">
+				<div class="col-xl-12 col-lg-12">
+					<div class="card shadow mb-4">
+						<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+							<h6 class="m-0 font-weight-bold text-primary">Login</h6>
+						</div>
+						<div class="card-body">
+							<div class="container">
 								<div class="row">
-
-									<div class="col-xl-12 col-lg-12">
-										<div class="card shadow mb-4">
-											<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-												<h6 class="m-0 font-weight-bold text-primary">Login</h6>
-											</div>
-											<div class="card-body">
+									<div class="col-md-12 col-md-offset-3">
+										<div class="panel panel-login">
+											<div class="panel-heading">
 												<div class="row">
 													<div class="col-xs-6">
 														<?php echo $this->session->flashdata('error'); ?>
